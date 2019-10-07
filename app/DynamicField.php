@@ -8,6 +8,6 @@ class DynamicField extends Model
 {
     public $table = "dynamic_fields";
     protected $fillable = [
-        'nama',
+        'nama','username','password','email','phone'
     ];
 }

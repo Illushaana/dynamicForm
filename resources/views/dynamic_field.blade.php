@@ -9,14 +9,12 @@
     <title>Document</title>
 </head>
 <body>
-
       <div class="container">
-
-        <form method ="POST" action="/insert">
+        <form method ="POST" action="/addmore">
           @csrf
-          <h1 class="mt-12" style="text-align:center">Insert</h1>
-          <div id="insert">
-            <div class="card1" class="row my-3">
+          <h1 class="mt-3" style="text-align:center">Form Masuk Perusahaan</h1>
+          <div id="tablebordered">
+            <div class="card1" class="row my-4">
               <div class="col-lg-3"></div>
               <div class="card col-lg-6">
                 <div class="card-body">
@@ -41,9 +39,9 @@
                   @error('email') <div class="invalid-feedback">{{$message}}</div> @enderror
                 
                   <div class="form-group"></div>
-                  <label for="Phone">No Telepon</label>
-                  <input type="text" class="form-control @error('Phone') is-invalid @enderror" id="Phone" placeholder="Masukkan Phone" name="Phone"value="{{old('Phone')}}">
-                  @error('Phone') <div class="invalid-feedback">{{$message}}</div> @enderror
+                  <label for="phone">No Telepon</label>
+                  <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Masukkan Phone" name="phone"value="{{old('phone')}}">
+                  @error('phone') <div class="invalid-feedback">{{$message}}</div> @enderror
               
                   <div class="form-group">
                     <div class="dropdown">
@@ -93,17 +91,66 @@
             var postURL = "<?php echo url('addmore'); ?>";
             var i=1;
 
+            $(document).on('click', '.btn_close', function(){  
+       var button_id = $(this).attr("id");   
+          $('#card1'+button_id+'').remove();  
+    });  
+
             $('#add').click(function(){
               i++;
-              $('#insert').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+              $('#tablebordered').append(` 
+              <div class="card`+i+`" class="row my-4">
+              <div class="col-lg-5"></div>
+              <div class="card col-lg-6">
+                  <button type="button" name="close" id="`+i+`" class="btn btn-danger btn_close">X</button>
+                <div class="card-body">
+              
+              
+              <div class="form-group">
+                  <label for="nama">Nama</label>
+                  <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama" name="nama"value="{{old('nama')}}">
+                  @error('nama') <div class="invalid-feedback">{{$message}}</div> @enderror
+                  
+                  <div class="form-group"></div>
+                  <label for="username">Username</label>
+                  <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Masukkan username" name="username"value="{{old('username')}}">
+                  @error('username') <div class="invalid-feedback">{{$message}}</div> @enderror
+
+                  <div class="form-group"></div>
+                  <label for="password">Password</label>
+                  <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Masukkan password" name="password"value="{{old('password')}}">
+                  @error('password') <div class="invalid-feedback">{{$message}}</div> @enderror
+                
+                  <div class="form-group"></div>
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukkan email" name="email"value="{{old('email')}}">
+                  @error('email') <div class="invalid-feedback">{{$message}}</div> @enderror
+                
+                  <div class="form-group"></div>
+                  <label for="Phone">No Telepon</label>
+                  <input type="text" class="form-control @error('Phone') is-invalid @enderror" id="Phone" placeholder="Masukkan Phone" name="Phone"value="{{old('Phone')}}">
+                  @error('Phone') <div class="invalid-feedback">{{$message}}</div> @enderror
+              
+                  <div class="form-group">
+                    <div class="dropdown">
+                      <label for="occupation">Occupation</label>
+                      <select class="form-control" id="occupation">
+                        <option>BackEnd Programmer</option>
+                        <option>FrontEnd Programmer</option>
+                        <option>FullStack Programmer</option>
+                      </select>
+                    </div>
+                    </div>
+                    <div>
+                        @if (session('status'))
+                        <div id="berhasil" class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                        @endif
+                      </div>
+                </div>`);
               
             });
-
-            $(document).on('click', '.btn_remove', function(){
-              var button_id = $(this).attr("id");
-              $('#row'+button_id+'').remove();
-            });
-
             $.ajaxSetup({
               headers:{
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
