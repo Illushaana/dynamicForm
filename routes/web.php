@@ -15,9 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/insert', function(){
-    return view('dynamic_field');
-});
-
-Route::get('dynamic-field', 'DynamicFieldController@index');
-Route::get('dynamic-field/insert', 'DynamicFieldController@insert')->name('dynamic-field.insert');
+Route::get("addmore", "DynamicFieldController@addmore");
+Route::post("addmore", "DynamicFieldController@addMorePost");

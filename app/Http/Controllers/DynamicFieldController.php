@@ -9,53 +9,29 @@ use Validator;
 
 class DynamicFieldController extends Controller
 {
-    function index(){
-        return view('dynamic_field');
+
+    public function addmore(){
+        return view("dynamic_field");
     }
 
-    function insert(Request $request){
-        if($request->ajax()){
-            $rules = array([
-                'nama.*'=> 'required',
-                'username.*' => 'required',
-                'password.*' => 'required',
-                'email.*' => 'required',
-                'phone.*' => 'required',
-                'occupation.*'=> 'required']);
+    public function addMorePost(Request $request){
+            $rules = [];
 
-                $error = Validator::make($request->all(), $rules);
-                if($error->fails()){
-                    return response()->json(['error' => $error->errors()->all]);
+            foreach($request->input('name') as $key => $value){
+                $rules["name.{$key}"] ='required';
+            }
 
+            $validator = Validator::make($request->all(), $rules);
+
+            if($validator->passes()){
+
+                foreach($request->input('name') as $key => $value ){
+                    DynamicField::create(['name'=>$value]);
                 }
+                return response()->json(['success'=>'done']);
+            }
 
-                $name = $request->nama;
-                $username = $request->username;
-                $password = $request->password;
-                $email = $request->email;
-                $phone = $request->phone;
-                $occupation= $request->occupation;
-
-
-                for($count = 0; $count < count($name); $count++){
-
-
-                    $data = array ([
-                        'nama.*'=> $nama[$count],
-                        'username.*' => $username[$count],
-                        'password.*' => $password[$count],
-                        'email.*' => $email[$count],
-                        'phone.*' => $phone[$count],
-                        'occupation.*'=> $occupation[$count]  
-                    ]);
-                    $insert_data[] = $data;
-
-                }
-
-                DynamicField::insert($insert_data);
-                return response()->json([
-                    'success' => 'Data Added successfully.'
-                ]);
-        }
+            return response()->json(['error'=>$validator->errors()->all()]);
     }
+
 }
