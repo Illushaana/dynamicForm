@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get("addmore", "DynamicFieldController@addmore");
-Route::post("addmore", "DynamicFieldController@addMorePost");
+Route::post("addmore/insert", "DynamicFieldController@addMorePost")->name('addmore.insert');
+// Route::post("addmore/insert", "DyanmicFieldController@addMorePost")

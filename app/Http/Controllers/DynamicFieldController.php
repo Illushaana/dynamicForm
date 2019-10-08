@@ -13,10 +13,30 @@ class DynamicFieldController extends Controller
 
     public function addmore(){
         return view("dynamic_field");
+        dd(addmore);
     }
 
-    public function addMorePost(Request $request){
+     function addMorePost(Request $request){
            
+
+        // $request->validate([ 
+        //             'nama' => 'required|min:3|max:30',
+        //             'username' =>'required|max:30',
+        //             'password'=>'required',
+        //             'email'=>'required|email|regex:/^([a-z0-9+-]+)(.[a-z0-9+-]+)*@([a-z0-9-]+.)+[a-z]{1,6}$/ix'                    ,
+        //             'phone' => 'required|min:10|regex:^[+]*[62][0-9]{1,9}[]{0,9}[-\s\./0-9]*$^']);
+                    // 'occupation'=>'required'
+
+                    // $error = Validator::make($request->all(),$request);
+                    //     if($error->fails()){
+                    //         return response()->json(['error' => $error->errors()->all()
+                    //         ]);
+
+                    //     }else{
+
+            //  DynamicField::create($request->all());       
+            // return redirect('/addmore')->with('status', 'Form Berhasil di Tambahkan');
+
             if($request->ajax()){
                 $rules = array(
                         'nama.*' => 'required|min:3|max:30',
@@ -39,7 +59,7 @@ class DynamicFieldController extends Controller
                 $phone = $request->phone;
                 $occupation = $request->occupation;
                 
-                for($count = 0; $count <count($nama);$count++){
+                for($count = 0; $count < count($nama);$count++){
                 
                     $data = array(
                         'nama' => $nama[$count],
@@ -53,10 +73,10 @@ class DynamicFieldController extends Controller
                 }
 
                 DynamicField::insert($insert_data);
-                return response ()->json(['success' => 'Data Added Successfully']);
-            }
+                return redirect('/addmore')->with('status', 'Form Berhasil di Tambahkan');
+     }
+    }
 
-            }
             
-
+            
 }
