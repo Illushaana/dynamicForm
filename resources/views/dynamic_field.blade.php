@@ -28,33 +28,33 @@
                                   </div>
                                   <div class="form-group"></div>
                                   <label for="nama">Nama</label>
-                                  <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama" name="nama"value="{{old('nama')}}">
+                                  <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama" name="nama[]"value="{{old('nama')}}">
                                   @error('nama') <div class="invalid-feedback">{{$message}}</div> @enderror
                                   
                                   <div class="form-group"></div>
                                   <label for="username">Username</label>
-                                  <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Masukkan username" name="username"value="{{old('username')}}">
+                                  <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Masukkan username" name="username[]"value="{{old('username')}}">
                                   @error('username') <div class="invalid-feedback">{{$message}}</div> @enderror
                                   
                                   <div class="form-group"></div>
                                   <label for="password">Password</label>
-                                  <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Masukkan password" name="password"value="{{old('password')}}">
+                                  <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Masukkan password" name="password[]"value="{{old('password')}}">
                                   @error('password') <div class="invalid-feedback">{{$message}}</div> @enderror
                                   
                                   <div class="form-group"></div>
                                   <label for="email">Email</label>
-                                  <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukkan email" name="email"value="{{old('email')}}">
+                                  <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukkan email" name="email[]"value="{{old('email')}}">
                                   @error('email') <div class="invalid-feedback">{{$message}}</div> @enderror
                                   
                                   <div class="form-group"></div>
                                   <label for="phone">No Telepon</label>
-                                  <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Masukkan Phone" name="phone"value="{{old('phone')}}">
+                                  <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Masukkan Phone" name="phone[]"value="{{old('phone')}}">
                                   @error('phone') <div class="invalid-feedback">{{$message}}</div> @enderror
                                   
                                   <div class="form-group">
                                     <div class="dropdown">
                                       <label for="occupation">Occupation</label>
-                                      <select class="form-control" name="occupation" id="occupation">
+                                      <select class="form-control" name="occupation[]" id="occupation">
                                         <option>BackEnd Programmer</option>
                        <option>FrontEnd Programmer</option>
                        <option>FullStack Programmer</option>
@@ -115,33 +115,33 @@
                                     </div>
                                     <div class="form-group"></div>
                   <label for="nama">Nama</label>
-                  <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama" name="nama"value="{{old('nama')}}">
+                  <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama" name="nama[]"value="{{old('nama')}}">
                   @error('nama') <div class="invalid-feedback">{{$message}}</div> @enderror
                   
                   <div class="form-group"></div>
                   <label for="username">Username</label>
-                  <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Masukkan username" name="username"value="{{old('username')}}">
+                  <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Masukkan username" name="username[]"value="{{old('username')}}">
                   @error('username') <div class="invalid-feedback">{{$message}}</div> @enderror
 
                   <div class="form-group"></div>
                   <label for="password">Password</label>
-                  <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Masukkan password" name="password"value="{{old('password')}}">
+                  <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Masukkan password" name="password[]"value="{{old('password')}}">
                   @error('password') <div class="invalid-feedback">{{$message}}</div> @enderror
                 
                   <div class="form-group"></div>
                   <label for="email">Email</label>
-                  <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukkan email" name="email"value="{{old('email')}}">
+                  <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukkan email" name="email[]"value="{{old('email')}}">
                   @error('email') <div class="invalid-feedback">{{$message}}</div> @enderror
                 
                   <div class="form-group"></div>
                   <label for="phone">No Telepon</label>
-                  <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Masukkan Phone" name="phone"value="{{old('phone')}}">
+                  <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Masukkan Phone" name="phone[]"value="{{old('phone')}}">
                   @error('phone') <div class="invalid-feedback">{{$message}}</div> @enderror
               
                   <div class="form-group">
                     <div class="dropdown">
                       <label for="occupation">Occupation</label>
-                      <select class="form-control" name="occupation" id="occupation">
+                      <select class="form-control" name="occupation[]" id="occupation">
                         <option>BackEnd Programmer</option>
                         <option>FrontEnd Programmer</option>
                         <option>FullStack Programmer</option>

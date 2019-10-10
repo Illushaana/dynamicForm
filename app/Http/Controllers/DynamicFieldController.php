@@ -18,35 +18,103 @@ class DynamicFieldController extends Controller
     }
 
      function addMorePost(Request $request){
-           
-            $data = array();
-            $data['nama'] = $request->get('nama');
-            $data['username'] = $request->get('username');
-            $data['password'] = $request->get('password');
-            $data['email'] = $request->get('email');
-            $data['phone'] = $request->get('phone');
-            $data['occupation'] = $request->get('occupation');
-
-            $insertData = collect($data);
-            $insertData->prepend($request->get('nama'), 'nama');
-            $insertData->prepend($request->get('username'), 'username');
-            $insertData->prepend($request->get('password'), 'password');
-            $insertData->prepend($request->get('email'), 'email');
-            $insertData->prepend($request->get('phone'), 'phone');
-            $insertData->prepend($request->get('occupation'), 'occupation');
-
-            $request->validate([
-                'nama' => 'required|max:30',
-                'username' => 'required|max:30',   
-                'password' => 'required|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/|',
-                'email' => 'required|email|regex:/^([a-z0-9+-]+)(.[a-z0-9+-]+)*@([a-z0-9-]+.)+[a-z]{1,6}$/ix',
-                'phone' => 'required|min:10|regex:^[+]*[62][0-9]{1,9}[]{0,9}[-\s\./0-9]*$^',
-            ]);
+      
+            if($request->ajax()){
+                $rules = array(
+                    'name.*' => 'required',
+                    'username.*' => 'required',
+                    'password.*' => 'required',
+                    'email.*' => 'required',
+                    'phone.*' => 'required',
+                    'occupation.*' => 'required'
+                );
+                $error = Validator::make($request->all(), $rules);
+                if($error->fails()){
+                    return response()->json([
+                        'error' => $error->errors()->all()
+                    ]);
+                }
+            }
 
 
-            $query_insert = DB::table('dynamic_fields')->insert($data);
 
-            return redirect('/addmore')->with('status', 'Form Berhasil di Tambahkan');
+
+        // foreach($request as $key=>$value){
+        //     $data[]=[
+        //         'name'=>$value['name'],
+        //     'username'=>$value['username'],
+        //     'password'=>$value['password'],
+        //     'email'=>$value['email'],
+        //     'phone'=>$value['phone'],
+        //     'occupation'=>$value['occupation']];
+        // }
+
+        // DB::table('dynamic-fields')->insert($data);
+
+        // return redirect('/addmore')->with('status', 'Data berhasil di tambahkan')
+
+
+
+
+        // $ePassword = Crypt::encryptString($request->get('password'));
+            // if($request->ajax()){
+            //     $nama=$request->nama;
+            //     $username=$request->username;
+            //     $password=$request->password;
+            //     $email=$request->email;
+            //     $phone=$request->phone;
+            //     $occupation=$request->occupation;
+
+            //     $data=array();
+            //     foreach($nama as $nam){
+            //         if(!empty($nam)){
+            //             $data[] = ['nama' => $nama,
+            //             'username' => $username,
+            //             'password' => $password,
+            //             'email'=> $email,
+            //             'phone' => $phone,
+            //             'occupation' => $occupation];
+            //         }
+            //     }
+            //         dynamic_fields::insert($data);
+
+            //         return redirect('/addmore')->with('status', 'Form Berhasil di Tambahkan');
+
+            
+            
+
+
+            // $data = array();
+            // $data['nama'] = $request->get('nama');
+            // $data['username'] = $request->get('username');
+            // $data['password'] = $ePassword;
+            // $data['email'] = $request->get('email');
+            // $data['phone'] = $request->get('phone');
+            // $data['occupation'] = $request->get('occupation');
+
+            // $insertData = collect($data);
+            // $insertData->prepend($request->get('nama'), 'nama');
+            // $insertData->prepend($request->get('username'), 'username');
+            // $insertData->prepend($request->get('password'), 'password');
+            // $insertData->prepend($request->get('email'), 'email');
+            // $insertData->prepend($request->get('phone'), 'phone');
+            // $insertData->prepend($request->get('occupation'), 'occupation');
+
+            // $request->validate([
+            //     'nama' => 'required|max:30',
+            //     'username' => 'required|max:30',   
+            //     'password' => 'required|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/|',
+            //     'email' => 'required|email|regex:/^([a-z0-9+-]+)(.[a-z0-9+-]+)*@([a-z0-9-]+.)+[a-z]{1,6}$/ix',
+            //     'phone' => 'required|min:10|regex:^[+]*[62][0-9]{1,9}[]{0,9}[-\s\./0-9]*$^',
+            // ]);
+                
+          
+            // $decrypted = Crypt::decryptString($);
+
+
+            // $query_insert = DB::table('dynamic_fields')->insert($insertData);
+
+            // return redirect('/addmore')->with('status', 'Form Berhasil di Tambahkan');
 
         // $request->validate([ 
         //             'nama' => 'required|min:3|max:30',
@@ -110,8 +178,10 @@ class DynamicFieldController extends Controller
 //     }
 
         
-            
-}
+          
      }
+    }
+
+     
 // }
               
