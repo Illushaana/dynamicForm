@@ -18,30 +18,61 @@ class DynamicFieldController extends Controller
     }
 
      function addMorePost(Request $request){
-      
+        //  return json_encode($request->all());
             if($request->ajax()){
+
                 $rules = array(
                     'name.*' => 'required',
                     'username.*' => 'required',
                     'password.*' => 'required',
-                    'email.*' => 'required',
-                    'phone.*' => 'required',
+                    'email.*' => 'required|regex:/^([a-z0-9+-]+)(.[a-z0-9+-]+)*@([a-z0-9-]+.)+[a-z]{1,6}$/ix',
+                    'phone.*' => 'required|min:10|regex:^[+]*[62][0-9]{1,9}[]{0,9}[-\s\./0-9]*$^]);',    
                     'occupation.*' => 'required'
                 );
+
                 $error = Validator::make($request->all(), $rules);
                 if($error->fails()){
                     return response()->json([
                         'error' => $error->errors()->all()
                     ]);
+
                 }
+                $nama =$request->nama;
+                $username = $request->username;
+                $password = $request->password;
+                $email = $request->email;
+                $phone = $request->phone;
+                $occupation = $request->occupation;
+
+                for($count = 0; $count < count($nama); $count++){
+                    $data = array('nama' => $nama[$count],
+                    'username' => $username[$count],
+                    'password'=> $password[$count],
+                    'email' => $email[$count],
+                    'phone'=>$phone[$count],
+                    'occupation' => $occupation[$count]
+                );
+                $insert_data[] = $data;
+                   
             }
+                    DynamicField::insert($insert_data);
+                    // return redirect('/addmore')->with(['status', 'Data Added Successfully']);
+                    return response()->json([
+                        'success'  => 'Data Added successfully.']);
+
+
+
+            }
+
+
+            
 
 
 
 
         // foreach($request as $key=>$value){
         //     $data[]=[
-        //         'name'=>$value['name'],
+        //         'nama'=>$value['nama'],
         //     'username'=>$value['username'],
         //     'password'=>$value['password'],
         //     'email'=>$value['email'],
@@ -51,7 +82,7 @@ class DynamicFieldController extends Controller
 
         // DB::table('dynamic-fields')->insert($data);
 
-        // return redirect('/addmore')->with('status', 'Data berhasil di tambahkan')
+        // return redirect('/addmore')->with('status', 'Data berhasil di tambahkan');
 
 
 
