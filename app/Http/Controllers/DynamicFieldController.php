@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\DynamicField;
 use Validator;
 use Illuminate\Support\Facades\Crypt;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 
 class DynamicFieldController extends Controller
@@ -19,14 +19,18 @@ class DynamicFieldController extends Controller
 
      function addMorePost(Request $request){
         //  return json_encode($request->all());
-            if($request->ajax()){
+
+        // $ePassword = Crypt::encryptString($request->get('password'));
+
+
+        if($request->ajax()){
 
                 $rules = array(
                     'name.*' => 'required',
                     'username.*' => 'required',
                     'password.*' => 'required',
                     'email.*' => 'required|regex:/^([a-z0-9+-]+)(.[a-z0-9+-]+)*@([a-z0-9-]+.)+[a-z]{1,6}$/ix',
-                    'phone.*' => 'required|min:10|regex:^[+]*[62][0-9]{1,9}[]{0,9}[-\s\./0-9]*$^]);',    
+                    'phone.*' => 'required|min:10',    
                     'occupation.*' => 'required'
                 );
 
@@ -55,13 +59,14 @@ class DynamicFieldController extends Controller
                 $insert_data[] = $data;
                    
             }
+
+                
+
+
                     DynamicField::insert($insert_data);
                     // return redirect('/addmore')->with(['status', 'Data Added Successfully']);
                     return response()->json([
                         'success'  => 'Data Added successfully.']);
-
-
-
             }
 
 
@@ -206,12 +211,46 @@ class DynamicFieldController extends Controller
 //                 DynamicField::insert($insert_data);
 //                 return redirect('/addmore')->with('status', 'Form Berhasil di Tambahkan');
 //      }
+}
 //     }
+    public function list(){
+        $listforms = DB::table('dynamic_fields')->get();
+        // dd($listforms);
+        return view('list_form',['listforms' => $listforms]);
 
-        
-          
-     }
     }
+        
+      
+    public function update(Request $request, dynamic_fields $listforms){
+
+        $rules = array(
+            'name.*' => 'required',
+            'username.*' => 'required',
+            'password.*' => 'required',
+            'email.*' => 'required|regex:/^([a-z0-9+-]+)(.[a-z0-9+-]+)*@([a-z0-9-]+.)+[a-z]{1,6}$/ix',
+            'phone.*' => 'required|min:10',    
+            'occupation.*' => 'required'
+        );
+
+        dynamic_fields::where('id', $listforms->id)->update([
+            'nama' => $request->nama,
+            'username' => $request->username,
+            'password' => $request->password,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'occupation' => $request->occupation
+        ]);
+        return redirect('addmore')->with('status', 'data mahasiswa berhasil diubah');
+
+    }
+
+    public function delete(Request $request){
+            $listforms = DynamicField::find($request->id);
+            $listforms->delete();
+        return redirect('/lists')->with('status', 'Form Has Been Deleted');
+    }
+
+     }
 
      
 // }
