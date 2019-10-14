@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('list_form');
-});
+
 
 Route::get("addmore", "DynamicFieldController@addmore");
 Route::post("addmore/insert", "DynamicFieldController@addMorePost")->name('addmore.insert');
 // Route::post("addmore/insert", "DyanmicFieldController@addMorePost")
+Route::get('/lists',"DynamicFieldController@list");
+
+Route::delete("/lists/{id}", "DynamicFieldController@delete");
+Route::get("/show", "DynamicFieldController@update");

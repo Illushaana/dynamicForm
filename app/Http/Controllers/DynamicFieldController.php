@@ -48,6 +48,8 @@ class DynamicFieldController extends Controller
                 $phone = $request->phone;
                 $occupation = $request->occupation;
 
+                // $ePassword = Crypt::encryptString($request->password);
+
                 for($count = 0; $count < count($nama); $count++){
                     $data = array('nama' => $nama[$count],
                     'username' => $username[$count],
@@ -221,7 +223,7 @@ class DynamicFieldController extends Controller
     }
         
       
-    public function update(Request $request, dynamic_fields $listforms){
+    public function update(Request $request, DynamicField $listforms){
 
         $rules = array(
             'name.*' => 'required',
@@ -232,7 +234,7 @@ class DynamicFieldController extends Controller
             'occupation.*' => 'required'
         );
 
-        dynamic_fields::where('id', $listforms->id)->update([
+        DynamicField::where('id', $listforms->id)->update([
             'nama' => $request->nama,
             'username' => $request->username,
             'password' => $request->password,

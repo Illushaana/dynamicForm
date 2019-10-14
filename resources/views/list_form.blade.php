@@ -36,29 +36,36 @@
         <th scope="col">phone</th>
         <th scope="col">Occupation</th>
       </tr>
+      
+      @foreach ($listforms as $f)
     </thead>
     <tbody>
       <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+      <td>{{$f->id}}</td>
+        <td>{{$f->nama}}</td>
+        <td>{{$f->username}}</td>
+        <td>{{$f->password}}</td>
+        <td>{{$f->email}}</td>
+        <td>{{$f->phone}}</td>
+        <td>{{$f->occupation}}</td>    
+        <td>
+        <a href="/show" class="badge badge-success">Edit</a>
+          
+        <form action="/lists/{{$f->id}}" method="POST" class="d-inline">
+          @method('delete')
+          @csrf
+          <button type="submit" class="btn btn-danger">Hapus</button>
+        </form>
+          
+        </td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
+      
     </tbody>
+    @endforeach
   </table>
 </div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
