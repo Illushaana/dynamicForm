@@ -18,5 +18,7 @@ Route::post("addmore/insert", "DynamicFieldController@addMorePost")->name('addmo
 // Route::post("addmore/insert", "DyanmicFieldController@addMorePost")
 Route::get('/lists',"DynamicFieldController@list");
 
-Route::delete("/lists/{id}", "DynamicFieldController@delete");
-Route::get("/show", "DynamicFieldController@update");
+Route::delete("/lists/{id}", "DataPostController@delete");
+// Route::get("/show", "DynamicFieldController@update");
+
+Route::put('/lists/{id}/edit', "DataPostController@update");

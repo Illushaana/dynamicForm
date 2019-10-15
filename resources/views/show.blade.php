@@ -17,15 +17,15 @@
                                 <a class="nav-link" href="/addmore">Insert</a>
                             </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/">Data</a>
+                                    <a class="nav-link" href="/lists">Data</a>
                                 </li>
                             </ul>
                         </div>
                     </nav>
                 
                 <form method="POST" id="form" action="{{lists/{{$f->id}}}">
-                    @method('patch')
                     @csrf
+                    @method('put')
                 <h1 class="mt-3" style="text-align: center">Insert</h1>
                 <div id="insert">
                 <div id="card1" class="row my-4">
@@ -34,39 +34,41 @@
                                     <div class="card-body">
                                                     <div class="form-group">
                                                       <label for="nama">Nama</label>
-                                                      <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama" name="nama[]"value="{{old('nama')}}">
+                                                      <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama" name="nama[]"value="{{$listforms->nama}}">
                                                       @error('nama') <div class="invalid-feedback">{{$message}}</div> @enderror
                                                     </div>
                                                     <div class="form-group">
                                                       <label for="username">Username</label>
-                                                      <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Masukkan Username" name="username[]"value="{{old('username')}}">
+                                                      <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Masukkan Username" name="username[]"value="{{$listforms->username}}">
                                                       @error('username') <div class="invalid-feedback">{{$message}}</div> @enderror
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="password">Password</label>
-                                                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Masukkan Password" name="password[]" value="{{old('password')}}">
+                                                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Masukkan Password" name="password[]" value="{{$listforms->password}}">
                                                         @error('password') <div class="invalid-feedback">{{$message}}</div> @enderror
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="email">Email</label>
-                                                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukkan Email" name="email[]" value="{{old('email')}}">
+                                                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukkan Email" name="email[]" value="{{$listforms->email}}">
                                                          @error('email') <div class="invalid-feedback">{{$message}}</div> @enderror
                                                    </div>
                                                     <div class="form-group">
                                                         <label for="phone">Nomor phone</label>
-                                                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Masukkan Nomor phone" name="phone[]" value="{{old('phone')}}">
+                                                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Masukkan Nomor phone" name="phone[]" value="{{$listforms->phone}}">
                                                          @error('phone') <div class="invalid-feedback">{{$message}}</div> @enderror
                                                    </div>
                                                     <div class="form-group">
                                                         <div class="dropdown">
                                                                 <label for="occupation">occupation</label>
-                                                                <select class="form-control @error('occupation') is-invalid @enderror" id="occupation" name="occupation[]" value="{{old('occupation')}}">
+                                                                <select class="form-control @error('occupation') is-invalid @enderror" id="occupation" name="occupation[]" value="{{$listforms->occupation}}">
                                                                         <option selected>Pilih occupation...</option>
                                                                         <option>Frontend</option>
                                                                         <option>Backend</option>
                                                                         <option>Fullstack</option>
                                                                 </select>
                                                                 @error('occupation') <div class="invalid-feedback">{{$message}}</div> @enderror
+
+                                                                
                                                             </div>
                                                         </div>
                                                     <div>
