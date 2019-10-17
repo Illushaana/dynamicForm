@@ -45,18 +45,21 @@ class DataPostController extends Controller
     // }else{
        
         $listforms = DynamicField::find($request->id);
-        
-    //     $ePassword = Crypt::encryptString($request->password);
-    // }
-    
-    DynamicField::where('id', $listforms->id)->update([
-        'nama' => $request->nama,
-        'username' => $request->username,
-        'password' => $request->password,
-        'email' => $request->email,
-        'phone' => $request->phone,
-        'occupation' => $request->occupation
-    ]);
+            
+    // dd($listforms);
+    // // }
+    return view('show',['listforms' => $listforms]);
+    //         $ePassword = Crypt::encryptString($request->password);
+    //     dd($listforms->id);
+
+    // DynamicField::where('id', $listforms->id)->update([
+    //     'nama' => $request->nama,
+    //     'username' => $request->username,
+    //     'password' => $ePassword,
+    //     'email' => $request->email,
+    //     'phone' => $request->phone,
+    //     'occupation' => $request->occupation
+    // ]);
   
 
     // return redirect('addmore')->with('status', 'data mahasiswa berhasil diubah');

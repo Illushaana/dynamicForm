@@ -23,13 +23,8 @@ class DynamicFieldController extends Controller
      function addMorePost(Request $request){
         //  return json_encode($request->all());
 
-        // $ePassword = Crypt::encryptString($request->get('password'));
-
-
+        
         if($request->ajax()){
-
-          
-
             Validator::extend('phoneval', function($atribute, $value){
                 return Str::startsWith($value, '0') ||Str::startsWith($value, '+62');
             });
@@ -37,7 +32,6 @@ class DynamicFieldController extends Controller
             Validator::extend('occupationval', function($atribute, $value){
                 return $value=='Frontend' || $value=='Backend' || $value=='Fullstack';
             });
-
 
                 $rules = array(
                     'nama.*' => 'required|max:30',
@@ -65,9 +59,12 @@ class DynamicFieldController extends Controller
                 // $ePassword = Crypt::encryptString($request->password);
 
                 for($count = 0; $count < count($nama); $count++){
+                    $ePassword = Crypt::encryptString($password[$count]);
+
+
                     $data = array('nama' => $nama[$count],
                     'username' => $username[$count],
-                    'password'=> $password[$count],
+                    'password'=> $ePassword,
                     'email' => $email[$count],
                     'phone'=>$phone[$count],
                     'occupation' => $occupation[$count]
@@ -90,58 +87,12 @@ class DynamicFieldController extends Controller
     }
         
       
-    public function update(Request $request, DynamicField $listforms){
-
-            $listforms = DynamicField::find($request->id);
-
-            Validator::extend('phoneval', function($atribute, $value){
-                return Str::startsWith($value, '0') ||Str::startsWith($value, '+62');
-            });
-
-            Validator::extend('occupationval', function($atribute, $value){
-                return $value=='Frontend' || $value=='Backend' || $value=='Fullstack';
-            });
-
-
-        $rules = array(
-            'nama' => 'required|max:30',
-            'username' => 'required',
-            'password' => 'required',
-            'email' => 'required|regex:/^([a-z0-9+-]+)(.[a-z0-9+-]+)*@([a-z0-9-]+.)+[a-z]{1,6}$/ix',
-            'phone' => 'required|min:10|phoneval',    
-            'occupation' => 'required|occupationval'
-        );
-
-        
-        $error = Validator::make($request->all(),$rules);
-        if($error->fails()){
-            $errorMessage=$error->errors()->all();
-            $stringError=implode("<br>", $errorMessage);
-           return redirect('/shows{id}')->with('status', 'Data yang dimasukkan error');
-            
-        }else{
-            $listforms = DynamicField::find($request->id);
-            
-            // $ePassword = Crypt::encryptString($request->password);
-        // }
-        
-        DynamicField::where('id', $listforms->id)->update([
-            'nama' => $request->nama,
-            'username' => $request->username,
-            'password' => $request->password,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'occupation' => $request->occupation
-        ]);
-      
-
-        return redirect('addmore')->with('status', 'data mahasiswa berhasil diubah');
-
+  
     }
 
   
-     }
+     
     
-}
+
 // }
               

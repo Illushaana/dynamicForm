@@ -40,15 +40,14 @@
       <td>{{$f->id}}</td>
         <td>{{$f->nama}}</td>
         <td>{{$f->username}}</td>
-        <td>{{$f->password}}</td>
+        {{-- <td>{{$f->password}}</td> --}}
         <td>{{$f->email}}</td>
         <td>{{$f->phone}}</td>
         <td>{{$f->occupation}}</td>    
         <td>
         
-        <form action="/lists/{{$f->id}}/edit" method="POST" class="d-inline">
-          @method('PUT')
-          @csrf
+        <form action="/show" class="d-inline">
+        <input type="text" hidden name="id" value="{{$f->id}}">
           <button type="submit" class="btn btn-primary">Edit</button>
         </form>
           
