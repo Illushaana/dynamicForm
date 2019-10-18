@@ -24,3 +24,4 @@ Route::delete("/lists/{id}", "DataPostController@delete");
 Route::get('show', "DataPostController@update");
 // Route::put('/lists/{id}/edit', "DataPostController@update");
 
+// Route::get('/lists/{id}/edit' ,"DataPostController@")

@@ -14,20 +14,28 @@
 
     
     <div class="container">
-        
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/addmore">Insert</a>
-                    </li>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="navbar-inner">
+              <div class="container">
+           
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </a>
+                  <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link" href="/lists">Data</a>
+                          <a class="nav-link active" href="/">List</a>
                         </li>
-                    </ul>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/addmore">Insert</a>
+                        </li>
+                      </ul>
+      
+                  </div>
                 </div>
-            </nav>
+              </div>
+            </div>
+          </nav>
         
         <form method="POST" id="form">
             @csrf
