@@ -116,6 +116,14 @@
     $(document).ready(function(){ 
         var i=1;
 
+        $("#nama").val('');
+                $("#username").val('');
+                $("#password").val('');
+                $("#email").val('');
+                $("#phone").val('');
+                $("#occupation");
+
+
     $(document).on('click', '.btn_close', function(){  
        var button_id = $(this).attr("id");   
           $('#card'+button_id+'').remove();  
@@ -213,8 +221,17 @@
                         else
                         {
                             $('#result').html('<div class="alert alert-success">'+data.success+'</div>');
-                        }
                         $('#save').attr('disabled', false);
+                        setTimeout(function(){
+                            location.reload();
+
+                        },4000);
+                        }
+    //                     $(document).ajaxStop(function() {
+    //                     setInterval(function() {
+    //                     location.reload();
+    //                       }, 3000);
+    // });
                     }
                 }) 
         }); 
